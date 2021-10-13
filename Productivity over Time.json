@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "title": "Productivity (GDP per hour of work) over time",
+  "width": "container",
+  "data": {
+    "url": "https://raw.githubusercontent.com/VinulFernando/FIT3179/main/gdp_hour.csv"
+  },
+  "mark": {"type": "line", "point": true},
+  "transform": [
+    {
+      "filter": "datum.Country=='Norway'|datum.Country=='United States'|datum.Country=='Germany'|datum.Country=='South Korea'|datum.Country=='Australia'"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "timeUnit": "year",
+      "field": "Year",
+      "axis": {"grid": false, "tickCount": 6}
+    },
+    "y": {
+      "field": "GDPperHour",
+      "type": "quantitative",
+      "title": "GDP($) per hour worked",
+      "axis": {"grid": false, "tickCount": 5}
+    },
+    "color": {"field": "Country", "type": "nominal"},
+    "tooltip": [
+      {"field": "Country", "type": "nominal"},
+      {
+        "field": "GDPperHour",
+        "type": "quantitative",
+        "title": "GDP($) per hour worked",
+        "format": ".2f"
+      },
+      {"field": "Year", "type": "temporal", "timeUnit": "year"}
+    ]
+  },
+  "config": {}
+}

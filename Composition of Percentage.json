@@ -1,0 +1,40 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "title": "Percentage composition of GDP",
+  "width": "container",
+  "params": [
+    {
+      "name": "Country_selection",
+      "bind": {
+        "input": "select",
+        "options": [null, "China", "Russia"],
+        "labels": ["United States"],
+        "name": "Country Selection: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "(Country_selection == null && datum.Country == 'United States') || datum.Country == Country_selection "
+    }
+  ],
+  "data": {
+    "url": "https://raw.githubusercontent.com/VinulFernando/FIT3179/main/Expenditure.csv"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "Expenditure",
+      "type": "nominal",
+      "axis": {"domain": false, "ticks": 5, "labelAngle": 0, "labelPadding": 10}
+    },
+    "y": {
+      "field": "Percentage",
+      "type": "quantitative",
+      "axis": {"tickCount": 5, "grid": false},
+      "title": "Percentage of total GDP"
+    },
+    "color": {"field": "Country"}
+  },
+  "config": {"legend": {"disable": true}}
+}
